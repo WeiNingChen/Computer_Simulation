@@ -278,6 +278,7 @@ void report(void)  /* Report generator function. */
     for (j = 1; j <= num_stations; ++j)
         fprintf(outfile, "\n\n%4d%17.3f%17.3f%17.3f", j, filest(j),
                 timest(0.0, -j) / num_machines[j], sampst(0.0, -j));
-
+    
+    fprintf(outfile,"\n\n\n");
 }
 
