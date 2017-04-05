@@ -4,7 +4,7 @@ Homework Problem 1 using simlib
 
 Number of stations: 2 
 
-Mean interarrival time: 1.660 hours
+Mean interarrival time: 1.000 hours
 
 Inspec time: uniform(0.250, 1.050) (hours)
 
@@ -14,7 +14,7 @@ Probability of repair: (0.100, 1.000)
 
 Probability of re-inspection: (0.700,1.000)
 
-Length of the simulation: 5000.000 hours
+Length of the simulation: 500000.000 hours
 
 
 
@@ -22,13 +22,13 @@ Length of the simulation: 5000.000 hours
 =================== simulation counters ==========================
 
 
-Time simulation ended:    5000.000 hours
+Time simulation ended:  500000.000 hours
 
-Arrival Counter:             3047 
+Arrival Counter:           500157 
 
-Departure Counter:           3043 
+Departure Counter:         500157 
 
-Queue Inspec:                   1 
+Queue Inspec:                   0 
 
 Queue Repair:                   0 
 
@@ -41,8 +41,8 @@ Queue Repair:                   0
  Work      Average number      Average       Average delay
 station       in queue       utilization        in queue
 
-   1            0.319            0.543            0.384
+   1            4.583            0.890            3.346
 
-   2            0.079            0.407            0.318
+   2            0.498            0.678            1.213
 
 
