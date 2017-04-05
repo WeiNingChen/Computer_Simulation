@@ -113,10 +113,6 @@ main()  /* Main function. */
                 break;
         }
     
-        /* If the event just executed was not the end-simulation event (type
-        EVENT_END_SIMULATION), continue simulating.  Otherwise, end the
-        simulation. */
-    
     } while (next_event_type != EVENT_END_SIMULATION);
 
 
@@ -153,8 +149,6 @@ void arrive(bool new_job)  /* Arrival event function. */
     /* If this is a new arrival to the system, generate the time of the next
        arrival and determine the job type and task number of the arriving
        job. */
-
-    /* new job always arriving at station 1 */
 
     if (new_job == true) {
      
@@ -193,8 +187,6 @@ void arrive(bool new_job)  /* Arrival event function. */
         transfer[3] = station;
         event_schedule(sim_time + uniform(service_time_param[station][0],
                     service_time_param[station][1], station),EVENT_DEPARTURE);
-        //event_schedule(sim_time + uniform(dist_inspect_a, dist_inspect_b, STREAM_INSPECT),
-        //               EVENT_DEPARTURE);
     }
 }
 
@@ -226,10 +218,8 @@ void depart(void)  /* Departure event function. */
         
         event_schedule(sim_time + uniform(service_time_param[station][0],
                     service_time_param[station][1], station),EVENT_DEPARTURE);
-        
 
     }
-
     
     /* Determine after the departure, leave the system or not */
 
@@ -250,11 +240,8 @@ void depart(void)  /* Departure event function. */
 
 }
 
-
 void report(void)  /* Report generator function. */
 {
-    /* Get and write out estimates of desired measures of performance. */
-
     fprintf(outfile, "\n\n\n=================== simulation counters ==========================\n\n");
     fprintf(outfile, "\nTime simulation ended:%12.3f hours\n", sim_time);
     fprintf(outfile, "\nArrival Counter:%17d \n", cnt_arrival);
