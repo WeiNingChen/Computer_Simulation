@@ -6,10 +6,6 @@
 #define EVENT_DEPARTURE       2  /* Event type for departure. */
 #define EVENT_END_SIMULATION  3
 
-//#define LIST_INSPEC_QUEUE     1  /* List number for inspection queue. */
-//#define LIST_INSPEC           2  /* List number for inspection server. */
-//#define LIST_REPAIR_QUEUE     3  /* List number for repair queue. */
-//#define LIST_REPAIR           4  /* List number for repair server. */
 #define INSPEC                  1
 #define REPAIR                  2
 
@@ -49,15 +45,14 @@ main()  /* Main function. */
 {
     /* Open input and output files. */
     
-    infile  = fopen("hw1.in", "r");
-    outfile = fopen("hw1.out", "w");
+    infile  = fopen("../input/hw1.in", "r");
+    outfile = fopen("../output/hw1.out", "w");
 
     /* Read input parameters. */
 
     fscanf(infile, "%d %f %f", &num_stations,  &mean_interarrival, &length_simulation);
     
     /* service_time_param[station][0,1] -> uniform dist.*/
-    printf("%d", num_stations);
     for (i = 1; i <= num_stations; ++i)
         for (j = 0; j < 2; ++j)
             fscanf(infile, "%f", &service_time_param[i][j]);
@@ -67,21 +62,21 @@ main()  /* Main function. */
     for (i = 1; i <= num_stations; ++i)
         for (j = 1; j <=2 ; ++j)
             fscanf(infile, "%f", &p_route[i][j]);
-    //printf("here3!!");
     /* Write report heading and input parameters. */
-    //fprintf(outfile, "Single-server queueing system using simlib\n\n");
-    fprintf(outfile, "Number of stations%11.3d \n\n", num_stations);
-    fprintf(outfile, "Mean interarrival time%11.3f minutes\n\n",
+    fprintf(outfile, "Homework Problem 1 using simlib\n\n");
+    fprintf(outfile, "=================== simulation parameters ==========================\n\n");
+    fprintf(outfile, "Number of stations: %d \n\n", num_stations);
+    fprintf(outfile, "Mean interarrival time: %.3f hours\n\n",
             mean_interarrival);
-    fprintf(outfile, "Inspec time%16.3f%24.3f minutes\n\n", 
+    fprintf(outfile, "Inspec time: uniform(%.3f, %.3f) (hours)\n\n", 
             service_time_param[INSPEC][0], service_time_param[INSPEC][1]);
-    fprintf(outfile, "Repair time%16.3f%24.3f minutes\n\n", 
+    fprintf(outfile, "Repair time: uniform(%.3f, %.3f) (hours)\n\n", 
             service_time_param[REPAIR][0], service_time_param[REPAIR][1]);
-    fprintf(outfile, "Probability of  repair %16.3f%20.3f minutes\n\n", 
+    fprintf(outfile, "Probability of repair: (%.3f, %.3f)\n\n", 
             p_route[REPAIR][1], p_route[REPAIR][2]);
-    fprintf(outfile, "Probability of  re-inspection %16.3f%20.3f minutes\n\n", 
+    fprintf(outfile, "Probability of re-inspection: (%.3f,%.3f)\n\n", 
             p_route[INSPEC][1], p_route[INSPEC][2]);
-    fprintf(outfile, "Length of the simulation%14f\n\n\n hours", length_simulation);
+    fprintf(outfile, "Length of the simulation: %.3f hours\n\n", length_simulation);
 
     /* Initialize simlib */
 
@@ -141,8 +136,6 @@ void init_model(void)  /* Initialization function. */
     num_machines[REPAIR] = 2;
     route[INSPEC] = REPAIR;
     route[REPAIR] = INSPEC;
-    //p_repair[1] = 0.7;
-    //p_repair[2] = 1.0;
     cnt_arrival = 0;
     cnt_departure = 0;
 
@@ -269,14 +262,17 @@ void report(void)  /* Report generator function. */
     //out_sampst(outfile, SAMPST_DELAYS, SAMPST_DELAYS);
     //fprintf(outfile, "\nQueue length (1) and server utilization (2):\n");
     //out_filest(outfile, LIST_QUEUE, LIST_SERVER);
-    fprintf(outfile, "\nTime simulation ended:%12.3f minutes\n", sim_time);
-    fprintf(outfile, "\nArrival Counter:%12d \n", cnt_arrival);
-    fprintf(outfile, "\nDeparture Counter:%12d \n", cnt_departure);
-    fprintf(outfile, "\nQueue Inspec:%12d \n", list_size[INSPEC]);
-    fprintf(outfile, "\nQueue Repair:%12d \n", list_size[REPAIR]);
+    fprintf(outfile, "\n\n\n=================== simulation counters ==========================\n\n");
+    fprintf(outfile, "\nTime simulation ended:%12.3f hours\n", sim_time);
+    fprintf(outfile, "\nArrival Counter:%17d \n", cnt_arrival);
+    fprintf(outfile, "\nDeparture Counter:%15d \n", cnt_departure);
+    fprintf(outfile, "\nQueue Inspec:%20d \n", list_size[INSPEC]);
+    fprintf(outfile, "\nQueue Repair:%20d \n\n", list_size[REPAIR]);
+    
+    fprintf(outfile, "\n\n\n=================== simulation statistics ==========================\n\n");
     
     fprintf(outfile,
-           "\n\n\n Work      Average number      Average       Average delay");
+           "\n Work      Average number      Average       Average delay");
     fprintf(outfile,
              "\nstation       in queue       utilization        in queue");
     for (j = 1; j <= num_stations; ++j)
