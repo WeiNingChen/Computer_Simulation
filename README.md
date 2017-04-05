@@ -5,8 +5,10 @@ Using `simlib` to simulate the system model described in problem 1.
 
 ## Getting Started
 
-Type `make` to compile the source code. The input file is placed in `input/`, and the output file is in `output/`.
-The binary is in `bin`.
+Type `make` to compile the source code. The input file hw1.in is placed in `input/`, and the output file will be put in `output/`.
+The binary file `hw1` will be compiled to `bin`.
+To run the code, simply run `./bin/hw1`. (NOTE: you have to run the code under the path `./`, instead of './bin/`!!)
+To test the customered input file, please follow the input format, and rename it as "hw1.in" and put it into `input/`.
 
 ### Prerequisites
 

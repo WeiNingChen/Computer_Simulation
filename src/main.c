@@ -45,8 +45,8 @@ main()  /* Main function. */
 {
     /* Open input and output files. */
     
-    infile  = fopen("../input/hw1.in", "r");
-    outfile = fopen("../output/hw1.out", "w");
+    infile  = fopen("input/hw1.in", "r");
+    outfile = fopen("output/hw1.out", "w");
 
     /* Read input parameters. */
 
@@ -227,9 +227,6 @@ void depart(void)  /* Departure event function. */
         event_schedule(sim_time + uniform(service_time_param[station][0],
                     service_time_param[station][1], station),EVENT_DEPARTURE);
         
-        //else if (station == REPAIR)
-        //    event_schedule(sim_time + uniform(dist_repair_a, dist_repair_b, STREAM_REPAIR),
-        //               EVENT_DEPARTURE);
 
     }
 
@@ -258,10 +255,6 @@ void report(void)  /* Report generator function. */
 {
     /* Get and write out estimates of desired measures of performance. */
 
-    //fprintf(outfile, "\nDelays in queue, in minutes:\n");
-    //out_sampst(outfile, SAMPST_DELAYS, SAMPST_DELAYS);
-    //fprintf(outfile, "\nQueue length (1) and server utilization (2):\n");
-    //out_filest(outfile, LIST_QUEUE, LIST_SERVER);
     fprintf(outfile, "\n\n\n=================== simulation counters ==========================\n\n");
     fprintf(outfile, "\nTime simulation ended:%12.3f hours\n", sim_time);
     fprintf(outfile, "\nArrival Counter:%17d \n", cnt_arrival);
